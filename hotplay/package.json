@@ -1,0 +1,24 @@
+{
+  "name": "hotplay",
+  "version": "1.0.0",
+  "description": "hotplay - compatible game replayer",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/njw1204/hot-play.git"
+  },
+  "author": {
+    "name": "Jongwoo Na",
+    "email": "njw1204@naver.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/njw1204/hot-play/issues"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
