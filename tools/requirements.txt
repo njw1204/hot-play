@@ -1,0 +1,3 @@
+# Python Modules. Please install with pip.
+requests
+beautifulsoup4

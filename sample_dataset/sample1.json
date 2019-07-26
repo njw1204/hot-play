@@ -1,6 +1,7 @@
 {
     "info": {
         "canRevive": true,
+        "interpolation": false,
         "playerScale": 0.23,
         "msPerFrame": 333,
         "map": "Summoner's Rift",

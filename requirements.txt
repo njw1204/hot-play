@@ -1,0 +1,5 @@
+# Python Modules. Please install with pip.
+requests
+beautifulsoup4
+riotwatcher
+pubg-python

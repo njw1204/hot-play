@@ -4,34 +4,7 @@ import re
 import json
 import requests
 from riotwatcher import RiotWatcher
-
-
-class GameEvent(object):
-    def __init__(self, event, timestamp, data=None):
-        self.event = event
-        self.timestamp = timestamp
-        self.data = data
-
-    def toDict(self):
-        return {
-            "type": self.event,
-            "data": self.data,
-            "time": self.timestamp
-        }
-
-    def __repr__(self):
-        return str(self.toDict())
-
-    def __lt__(self, other):
-        return (self.timestamp < other.timestamp)
-
-
-class MyJSONEncoder(json.JSONEncoder):
-    def default(self, o):
-        if isinstance(o, GameEvent):
-            return o.toDict()
-        else:
-            return super.default()
+from lib.game_event import *
 
 
 def adjustLocation(x, y, mapId):
@@ -107,6 +80,7 @@ def parseBasicGameInfo(match):
 
     info = dict()
     info["canRevive"] = True
+    info["interpolation"] = False
     info["playerScale"] = 0.23
     info["msPerFrame"] = 333
 
@@ -162,16 +136,17 @@ def parseTimeline(timeline, mapId):
                 continue
             events.append(GameEvent("MOVE", frame["timestamp"], {
                 "id": str(e["participantId"]),
-                "level": e["level"],
                 "x": x,
-                "y": y
+                "y": y,
+                "rank": None,
+                "level": e["level"]
             }))
         for e in frame["events"]:
             if e["type"] == "CHAMPION_KILL":
                 events.append(GameEvent("KILL", e["timestamp"], {
-                    "killerId": e["killerId"],
-                    "victimId": e["victimId"],
-                    "assistIds": e["assistingParticipantIds"]
+                    "killerId": str(e["killerId"]),
+                    "victimId": str(e["victimId"]),
+                    "assistIds": list(map(str, e["assistingParticipantIds"]))
                 }))
             elif e["type"] == "BUILDING_KILL" and e["buildingType"] == "TOWER_BUILDING" and e["towerType"] in tower_type_consts and mapId == 11:
                 color = "BLUE" if e["teamId"] == 100 else "RED"
@@ -202,7 +177,7 @@ if __name__ == "__main__":
     match = watcher.match.by_id(region, match_id)
     timeline = watcher.match.timeline_by_match(region, match_id)
     replay = {"info": parseBasicGameInfo(match), "timeline": parseTimeline(timeline, match["mapId"])}
-    result = json.dumps(replay, cls=MyJSONEncoder)
-    with open("output.json", "w", encoding="utf-8") as f:
+    result = json.dumps(replay, cls=GameEventJSONEncoder)
+    with open("lol_output.json", "w", encoding="utf-8") as f:
         f.write(result)
     print("Complete!")

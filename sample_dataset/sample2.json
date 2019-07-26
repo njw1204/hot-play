@@ -1,12 +1,12 @@
 {
     "info": {
         "canRevive": true,
+        "interpolation": false,
         "playerScale": 0.23,
         "msPerFrame": 333,
         "map": "Summoner's Rift",
         "win": "Red",
-        "players": [
-            {
+        "players": [{
                 "name": "\uc624\uc774\ub3d9\uc0dd",
                 "team": 1,
                 "character": "Riven",
@@ -78,8 +78,7 @@
             }
         ]
     },
-    "timeline": [
-        {
+    "timeline": [{
             "type": "CREATE",
             "data": {
                 "id": "BLUE_TOP_LANE_OUTER_TURRET",

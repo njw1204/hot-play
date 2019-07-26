@@ -12,7 +12,7 @@ app.set("views", "./views");
 
 
 app.get("/sample", function(req, res) {
-    fs.readFile("./sample_dataset/sample2.json", "utf8", function(err, data) {
+    fs.readFile("./sample_dataset/sample3.json", "utf8", function(err, data) {
         if (err) throw err;
         res.render("index", {
             replay: data
