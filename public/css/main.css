@@ -1,0 +1,57 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 70px;
+    margin-bottom: 120px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.top-slide {
+    background-color: slategray;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+.menu {
+    float: right;
+    margin: 0;
+}
+
+.menu li {
+    display: inline-block;
+}
+
+.menu li::after {
+    content: " |";
+}
+
+.menu li:last-child::after {
+    content: "";
+}
+
+#start {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin-bottom: 50px;
+}
+
+.card {
+    display: inline-block;
+    width: 30%;
+    border: 1px solid;
+    vertical-align: top;
+    margin: 10px 0;
+}
+
+.clear {
+    clear: both;
+}
