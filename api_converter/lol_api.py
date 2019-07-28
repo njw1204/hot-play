@@ -81,8 +81,8 @@ def parseBasicGameInfo(match):
     info = dict()
     info["canRevive"] = True
     info["interpolation"] = False
-    info["playerScale"] = 0.23
-    info["msPerFrame"] = 333
+    info["playerScale"] = 0.3
+    info["speed"] = 20
 
     mapId = match["mapId"]
     if mapId == 10:

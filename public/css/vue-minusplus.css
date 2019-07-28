@@ -1,0 +1,52 @@
+.minusplusnumber {
+    border: 1px solid silver;
+    border-radius: 5px;
+    background-color: #FFF;
+    margin: 0 5px 0 5px;
+    display: inline-block;
+    text-align: center;
+    user-select: none;
+    font-size: 0;
+}
+
+.minusplusnumber div {
+    display: inline-block;
+}
+
+.minusplusnumber #field_container span {
+    background-color: #FFF;
+    color: #999;
+    margin-right: 2.5px;
+    font-size: 1rem;
+}
+
+.minusplusnumber #field_container #value {
+    color: black;
+    margin-right: 0;
+}
+
+.minusplusnumber .mpbtn {
+    padding: 3px 0;
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.minusplusnumber .minus {
+    margin-right: 3px;
+}
+
+.minusplusnumber .plus {
+    margin-left: 3px;
+}
+
+.minusplusnumber .mpbtn:hover {
+    background-color: #DDD;
+}
+
+.minusplusnumber .mpbtn:active {
+    background-color: #c5c5c5;
+}

@@ -1,0 +1,51 @@
+html, body {
+    background-color: #ECEFF1;
+    font-size: 16px;
+}
+
+#title {
+    display: inline-block;
+    margin: 0;
+}
+
+.header {
+    max-width: 800px;
+    margin: 1em auto 2em auto;
+}
+
+.replay-control {
+    max-width: 800px;
+    margin: 0 auto 10px auto;
+}
+
+#replay {
+    text-align: center;
+    clear: both;
+}
+
+#replay-timer {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    width: 150px;
+}
+
+#replay-slider {
+    display: inline-block;
+    vertical-align: middle;
+    width: 600px;
+    margin: 0;
+    padding: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+.right {
+    float: right;
+}
+
+[v-cloak] {
+    display: none;
+}

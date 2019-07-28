@@ -66,7 +66,7 @@ if __name__ == "__main__":
         "canRevive": False,
         "interpolation": True,
         "playerScale": 0.33,
-        "msPerFrame": 167,
+        "speed": 10,
         "map": map_name,
         "win": ", ".join(winners),
     }

@@ -2,8 +2,8 @@
     "info": {
         "canRevive": true,
         "interpolation": false,
-        "playerScale": 0.23,
-        "msPerFrame": 333,
+        "playerScale": 0.3,
+        "speed": 20,
         "map": "Summoner's Rift",
         "win": "Red",
         "players": [{

@@ -3,12 +3,28 @@ lol_info = {
 };
 
 
-function addLOLImageLoad(loadList) {
+function addLOLImageLoad(loadList, neededChampionsList) {
     for (var i = 0; i < lol_info.champions.length; i++) {
         champ_name = lol_info.champions[i];
-        loadList.push({
-            name: champ_name,
-            url: "assets/character/champions/" + champ_name + ".png"
-        })
+
+        var found = false;
+        if (neededChampionsList) {
+            for (var j = 0; j < neededChampionsList.length; j++) {
+                if (neededChampionsList[j] === champ_name) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        else {
+            found = true;
+        }
+
+        if (found) {
+            loadList.push({
+                name: champ_name,
+                url: "assets/character/champions/" + champ_name + ".png"
+            });
+        }
     }
 }

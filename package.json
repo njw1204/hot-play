@@ -19,6 +19,7 @@
     "url": "https://github.com/njw1204/hot-play/issues"
   },
   "dependencies": {
+    "compression": "^1.7.4",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "helmet": "^3.20.0"
