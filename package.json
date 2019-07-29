@@ -19,9 +19,14 @@
     "url": "https://github.com/njw1204/hot-play/issues"
   },
   "dependencies": {
+    "api-schema-builder": "^1.1.5",
     "compression": "^1.7.4",
+    "cors": "^2.8.5",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
-    "helmet": "^3.20.0"
+    "helmet": "^3.20.0",
+    "http-status": "^1.3.2",
+    "morgan": "^1.9.1",
+    "swagger-ui-express": "^4.0.7"
   }
 }
