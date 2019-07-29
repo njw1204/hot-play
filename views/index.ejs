@@ -5,18 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>HotPlay - Compatible Game Replayer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/vue-minusplus.css">
+    <link rel="stylesheet" href="https://hotplay.njw.kr/css/pure-min.css">
+    <link rel="stylesheet" href="https://hotplay.njw.kr/css/index.css">
+    <link rel="stylesheet" href="https://hotplay.njw.kr/css/vue-minusplus.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-slider-component@3.0.33/theme/default.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/vue/2.3.2/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-slider-component@3.0.33/dist/vue-slider-component.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.1.0/pixi.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pixi-filters@3.0.3/dist/pixi-filters.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/vue-minusplus.js"></script>
-    <script src="js/lol.js"></script>
-    <script src="js/player.js"></script>
+    <script src="https://hotplay.njw.kr/js/index.js"></script>
+    <script src="https://hotplay.njw.kr/js/vue-minusplus.js"></script>
+    <script src="https://hotplay.njw.kr/js/lol.js"></script>
+    <script src="https://hotplay.njw.kr/js/player.js"></script>
     <script>
         window.replay = <%- replay %>;
     </script>
@@ -25,15 +26,15 @@
     <noscript>Your browser does not support Javascript.</noscript>
     <div id="app" v-cloak>
         <div class="header">
-            <h3 id="title">{{ title }}</h3>
+            <h3 id="title"><a href="/">{{ title }}</a></h3>
             <div class="right">
-                <v-minusplus v-model="playerSpeed" :min="1" :max="50" :interval="5"></v-minusplus>
+                <v-minusplus v-model="playerSpeed" :min="1" :max="100" :interval="5"></v-minusplus>
             </div>
         </div>
-        <div id="replay">
+        <div id="replay" class="container">
             <div class="replay-control">
                 <div id="replay-timer">
-                    <button id="replay-pause">P</button>
+                    <button id="replay-pause" class="pure-button"><i :class="pauseCaption"></i></button>
                 </div>
                 <div id="replay-slider">
                     <vue-slider v-model="timeline" ref="replayslider"

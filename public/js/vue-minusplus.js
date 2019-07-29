@@ -1,12 +1,12 @@
 Vue.component('v-minusplus', {
     template: `
 <div class="minusplusnumber">
-    <div class="mpbtn minus" v-on:mousedown="mpminus()" v-on:mouseup="stopChange()">&lt;</div>
+    <div class="mpbtn minus" v-on:mousedown="mpminus()">&lt;</div>
     <div id="field_container">
         <input type="hidden" v-model="newValue" />
         <span>x</span><span id="value">{{ newValue }}</span>
     </div>
-    <div class="mpbtn plus" v-on:mousedown="mpplus()" v-on:mouseup="stopChange()">&gt;</div>
+    <div class="mpbtn plus" v-on:mousedown="mpplus()">&gt;</div>
 </div>
 `,
     props: {
@@ -33,7 +33,8 @@ Vue.component('v-minusplus', {
             newValue: 0,
             intervalTask: 0,
             overflow: 0,
-            underflow: 0
+            underflow: 0,
+            taskOn: false
         }
 
     },
@@ -42,14 +43,24 @@ Vue.component('v-minusplus', {
             this.plus();
             clearInterval(this.intervalTask);
             this.intervalTask = setInterval(function () {
-                this.plus();
+                if (window.mp_mouseDown === false) {
+                    this.stopChange();
+                }
+                else {
+                    this.plus();
+                }
             }.bind(this), 130);
         },
         mpminus: function () {
             this.minus();
             clearInterval(this.intervalTask);
             this.intervalTask = setInterval(function () {
-                this.minus();
+                if (window.mp_mouseDown === false) {
+                    this.stopChange();
+                }
+                else {
+                    this.minus();
+                }
             }.bind(this), 130);
         },
         plus: function () {
@@ -88,4 +99,14 @@ Vue.component('v-minusplus', {
     created: function () {
         this.newValue = this.value;
     }
+});
+
+
+document.addEventListener("mousedown", function() {
+    window.mp_mouseDown = true;
+});
+
+
+document.addEventListener("mouseup", function() {
+    window.mp_mouseDown = false;
 });

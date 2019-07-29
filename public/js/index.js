@@ -14,6 +14,14 @@ window.onload = function() {
             },
             timelineMax: function() {
                 return getLastEventTime();
+            },
+            pauseCaption : function() {
+                if (this.playing === true) {
+                    return "fa fa-pause";
+                }
+                else {
+                    return "fa fa-play";
+                }
             }
         },
         methods: {

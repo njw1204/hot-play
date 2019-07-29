@@ -8,34 +8,60 @@ html, body {
     margin: 0;
 }
 
+#title a {
+    display: inline-block;
+    color: #DD0000;
+    text-decoration: none;
+}
+
+#title a:hover {
+    transform: scale(1.1);
+    -webkit-transition: transform .3s;
+    -moz-transition: transform .3s;
+    -o-transition: transform .3s;
+    -ms-transition: transform .3s;
+    transition: transform .3s;
+}
+
 .header {
     max-width: 800px;
     margin: 1em auto 2em auto;
 }
 
 .replay-control {
-    max-width: 800px;
+    width: 100%;
+    text-align: center;
     margin: 0 auto 10px auto;
 }
 
 #replay {
-    text-align: center;
     clear: both;
+    text-align: center;
 }
 
 #replay-timer {
     display: inline-block;
     text-align: left;
     vertical-align: middle;
-    width: 150px;
+    margin: 0;
+    padding: 0;
+}
+
+#replay-timer #replay-pause {
+    border: 1px solid #708090;
 }
 
 #replay-slider {
     display: inline-block;
     vertical-align: middle;
-    width: 600px;
-    margin: 0;
+    width: 720px;
+    margin: 0 0 0 20px;
     padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .clear {
