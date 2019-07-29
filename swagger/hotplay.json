@@ -1,0 +1,407 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "HotPlay API",
+    "description": "You can see the replay of any game with HotPlay API. Before use it, You\nshould convert the replay data to HotPlay JSON format.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "replay",
+      "description": "Watch the game replay on the browser"
+    }
+  ],
+  "paths": {
+    "/replay": {
+      "post": {
+        "tags": [
+          "replay"
+        ],
+        "operationId": "replay",
+        "summary": "Create HTML document to watch the requested replay data",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Replay"
+              }
+            }
+          },
+          "description": "Replay object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success. You can watch the replay if you load this HTML document into the browser.",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"utf-8\">\n    <title>HTML Document Example</title>\n  </head>\n  <body>\n    This is just an example document. Not real response.\n  </body>\n</html>"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Probably error in requested replay data. The error code and reason will be provided.",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"utf-8\">\n    <title>Error</title>\n  </head>\n  <body>\n    Invalid JSON\n  </body>\n</html>"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. Probably the url is wrong.",
+            "content": {
+              "text/html": {}
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed. Did you use GET or POST? Use the correct method.",
+            "content": {
+              "text/html": {
+                "schema": {}
+              }
+            }
+          },
+          "413": {
+            "description": "Payload Too Large. The request body (replay data) is too large.",
+            "content": {
+              "text/html": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Replay": {
+        "type": "object",
+        "required": [
+          "info",
+          "timeline"
+        ],
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/GameInfo"
+          },
+          "timeline": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            }
+          }
+        }
+      },
+      "GameInfo": {
+        "type": "object",
+        "required": [
+          "canRevive",
+          "players"
+        ],
+        "properties": {
+          "players": {
+            "type": "array",
+            "description": "유저 목록",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/components/schemas/Player"
+            }
+          },
+          "canRevive": {
+            "type": "boolean",
+            "description": "유저의 부활 가능 여부 (ex. LOL: true, PUBG: false)"
+          },
+          "map": {
+            "type": "string",
+            "description": "게임이 진행됐던 맵의 이름 (다음 목록에 없으면 생략)",
+            "enum": [
+              "Desert_Main",
+              "DihorOtok_Main",
+              "Erangel_Main",
+              "Savage_Main",
+              "Howling Abyss",
+              "Summoner's Rift",
+              "Twisted Treeline"
+            ]
+          },
+          "speed": {
+            "type": "integer",
+            "description": "플레이어의 재생 배속 (5의 배수로 설정. 단, 예외적으로 1은 사용 가능)",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 10,
+            "example": 20
+          },
+          "playerScale": {
+            "type": "number",
+            "description": "유저 스프라이트의 확대 비율",
+            "default": 1,
+            "minimum": 0,
+            "example": 0.33
+          },
+          "interpolation": {
+            "type": "boolean",
+            "description": "선형 보간법을 사용한 부드러운 움직임 지원",
+            "default": true
+          },
+          "win": {
+            "type": "string",
+            "description": "우승 유저 or 우승 팀 or 공동 우승 유저 여러명 나열 (자유롭게 작성)",
+            "example": "Blue"
+          }
+        }
+      },
+      "Player": {
+        "type": "object",
+        "required": [
+          "name",
+          "id"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "유저 이름(닉네임)",
+            "example": "njw1204"
+          },
+          "id": {
+            "type": "string",
+            "description": "고유 유저 ID(구별자)",
+            "example": "SGVsbG8sIHdvcmxkIQ=="
+          },
+          "character": {
+            "type": "string",
+            "description": "캐릭터(챔피언) 스프라이트 이름 (LOL의 경우 챔피언의 공식 영어 이름. 없으면 생략)",
+            "example": "Dr. Mundo"
+          },
+          "team": {
+            "type": "integer",
+            "description": "소속된 팀의 고유 번호 (없으면 생략)",
+            "example": 1
+          },
+          "role": {
+            "type": "string",
+            "description": "역할 (자유롭게 작성)",
+            "example": "JUNGLE"
+          }
+        }
+      },
+      "Event": {
+        "type": "object",
+        "required": [
+          "type",
+          "time",
+          "data"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "이벤트 종류",
+            "enum": [
+              "MOVE",
+              "KILL",
+              "CREATE",
+              "REMOVE",
+              "CIRCLE_ON"
+            ],
+            "example": "MOVE"
+          },
+          "time": {
+            "type": "integer",
+            "description": "이벤트 발생 시각 (게임 시작 시점으로부터 경과한 시간. ms 단위)",
+            "minimum": 0,
+            "example": 1080261
+          },
+          "data": {
+            "type": "object",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LogMove"
+              },
+              {
+                "$ref": "#/components/schemas/LogKill"
+              },
+              {
+                "$ref": "#/components/schemas/LogCreate"
+              },
+              {
+                "$ref": "#/components/schemas/LogRemove"
+              },
+              {
+                "$ref": "#/components/schemas/LogCircleOn"
+              }
+            ],
+            "example": {
+              "id": "SGVsbG8sIHdvcmxkIQ==",
+              "x": 449.830238,
+              "y": 381.7193,
+              "rank": 1,
+              "level": 1,
+              "hp": 0
+            }
+          }
+        }
+      },
+      "LogMove": {
+        "type": "object",
+        "required": [
+          "id",
+          "x",
+          "y"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "고유 유저 ID(구별자)",
+            "example": "SGVsbG8sIHdvcmxkIQ=="
+          },
+          "x": {
+            "type": "number",
+            "description": "이동한 지점의 미니맵 상에서의 X좌표",
+            "example": 449.830238
+          },
+          "y": {
+            "type": "number",
+            "description": "이동한 지점의 미니맵 상에서의 Y좌표",
+            "example": 381.7193
+          },
+          "rank": {
+            "type": "integer",
+            "description": "이벤트 발생 시점의 유저 순위",
+            "minimum": 1
+          },
+          "level": {
+            "type": "integer",
+            "description": "이벤트 발생 시점의 캐릭터 레벨",
+            "minimum": 1
+          },
+          "hp": {
+            "type": "number",
+            "description": "이벤트 발생 시점의 HP",
+            "minimum": 0
+          }
+        }
+      },
+      "LogKill": {
+        "type": "object",
+        "required": [
+          "victimId"
+        ],
+        "properties": {
+          "victimId": {
+            "type": "string",
+            "description": "죽은 유저(피해자)의 고유 ID(구별자)",
+            "example": "SGVsbG8sIHdvcmxkIQ=="
+          },
+          "killerId": {
+            "type": "string",
+            "description": "killer(가해자)의 고유 ID(구별자)",
+            "example": "SGVsbG8sIHdvcmxkIQ=="
+          },
+          "assistIds": {
+            "type": "array",
+            "description": "assister(킬에 도움을 준 사람)들의 고유 ID 목록",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "LogCreate": {
+        "type": "object",
+        "required": [
+          "id",
+          "x",
+          "y",
+          "sprite"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "생성할 오브젝트의 고유 ID(구별자)",
+            "example": "YXNkZg=="
+          },
+          "x": {
+            "type": "number",
+            "description": "오브젝트의 미니맵 상에서의 X좌표",
+            "example": 449.830238
+          },
+          "y": {
+            "type": "number",
+            "description": "오브젝트의 미니맵 상에서의 Y좌표",
+            "example": 381.7193
+          },
+          "sprite": {
+            "type": "string",
+            "description": "오브젝트에 사용할 스프라이트명",
+            "enum": [
+              "tower",
+              "package"
+            ],
+            "example": "package"
+          },
+          "tint": {
+            "type": "string",
+            "description": "스프라이트 tint 색상 설정 (16진수)",
+            "example": "0xFF0000"
+          }
+        }
+      },
+      "LogRemove": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "제거할 오브젝트의 고유 ID(구별자)",
+            "example": "YXNkZg=="
+          }
+        }
+      },
+      "LogCircleOn": {
+        "type": "object",
+        "required": [
+          "id",
+          "x",
+          "y",
+          "radius"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "생성할 오브젝트의 고유 ID(구별자)",
+            "example": "YXNkZg=="
+          },
+          "x": {
+            "type": "number",
+            "description": "원의 중심의 미니맵 상에서의 X좌표",
+            "example": 449.830238
+          },
+          "y": {
+            "type": "number",
+            "description": "원의 중심의 미니맵 상에서의 Y좌표",
+            "example": 381.7193
+          },
+          "radius": {
+            "type": "number",
+            "description": "원의 반지름",
+            "example": 10.23
+          },
+          "color": {
+            "type": "string",
+            "description": "원 테두리 색상 설정 (16진수)",
+            "default": "0x000000",
+            "example": "0xFF0000"
+          }
+        }
+      }
+    }
+  }
+}
