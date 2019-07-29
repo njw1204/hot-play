@@ -1,12 +1,30 @@
 html, body {
     margin: 0;
     padding: 0;
+    color: white;
 }
 
-h1 {
+body {
+    background-color: rgb(21, 16, 25);
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+.background {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+h1#title {
     text-align: center;
-    padding-top: 70px;
-    margin-bottom: 120px;
+    font-size: 5em;
+    padding-top: 150px;
+    margin-bottom: 150px;
+    font-family: 'Lora', serif;
+    /* color: #DD0000; */
 }
 
 .container {
@@ -15,10 +33,33 @@ h1 {
     text-align: center;
 }
 
+.top {
+    overflow: hidden;
+}
+
 .top-slide {
-    background-color: slategray;
     padding: 10px 0;
     margin-bottom: 10px;
+}
+
+#top-menu {
+    float: right;
+    margin: 0;
+}
+
+#top-menu li a {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+
+#top-menu li a:link, #top-menu li a:visited, #top-menu li a:active {
+    background: transparent;
+    color: white;
+}
+
+#top-menu li a:hover {
+    background: white;
+    color: black;
 }
 
 .menu {
@@ -38,14 +79,28 @@ h1 {
     content: "";
 }
 
-#start {
+#replay-button {
     font-size: 20px;
     padding: 10px 20px;
-    margin-bottom: 50px;
+    border: 1px solid #CCCCCC;
+}
+
+#replay-button:hover {
+    transform: scale(1.2);
+    -webkit-transition: transform .3s;
+    -moz-transition: transform .3s;
+    -o-transition: transform .3s;
+    -ms-transition: transform .3s;
+    transition: transform .3s;
+}
+
+.cardboard {
+    display: none;
 }
 
 .card {
     display: inline-block;
+    background-color: white;
     width: 30%;
     border: 1px solid;
     vertical-align: top;

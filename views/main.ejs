@@ -5,18 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>HotPlay - Compatible Game Replayer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora|Open+Sans&display=swap">
+    <link rel="stylesheet" href="css/pure-min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/title-animation.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <script src="js/main.js"></script>
 </head>
 <body>
-    <div class="top-slide">
-        <div class="container">
-            <ul class="menu">
-                <li>ABOUT</li>
-                <li>DOCS</li>
-                <li>GITHUB</li>
-            </ul>
-            <h1 class="clear">HotPlay</h1>
-            <button id="start">Start</button>
+    <div class="loader">Loading...</div>
+    <div class="top">
+        <div class="top-slide">
+            <div class="container">
+                <div class="pure-menu pure-menu-horizontal">
+                    <ul id="top-menu" class="pure-menu-list">
+                        <li class="pure-menu-item"><a href="/api" target="_blank" class="pure-menu-link">API</a></li>
+                        <li class="pure-menu-item"><a href="https://github.com/njw1204/hot-play" target="_blank" class="pure-menu-link">GITHUB</a></li>
+                    </ul>
+                </div>
+                <h1 id="title" class="clear">HotPlay</h1>
+                <form id="replay">
+                    <input id="replay-file" type="file" accept=".json" hidden/>
+                    <button id="replay-button" class="pure-button pure-button-primary" type="button">Watch Replay</button>
+                </form>
+            </div>
         </div>
     </div>
     <div class="container">
@@ -43,5 +55,7 @@
             </div>
         </div>
     </div>
+    <canvas class="background"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,33 @@
+#title {
+    position: relative;
+    letter-spacing: 4px;
+    color: #EE0000;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%);
+    mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%);
+    -webkit-mask-size: 200%;
+    mask-size: 200%;
+    animation: shine 2s linear infinite;
+    text-shadow: 1px 1px 1px #770000,
+        1px 2px 1px #770000,
+        1px 3px 1px #770000,
+        1px 4px 1px #770000,
+        1px 5px 1px #770000,
+        1px 6px 1px #770000,
+        1px 7px 1px #770000,
+        1px 8px 1px #770000,
+        1px 9px 1px #770000,
+        1px 10px 1px #770000,
+        1px 18px 6px rgba(16,16,16,0.4),
+        1px 22px 10px rgba(16,16,16,0.2),
+        1px 25px 35px rgba(16,16,16,0.2),
+        1px 30px 60px rgba(16,16,16,0.4);
+    padding-bottom: 10px;
+}
+
+@keyframes shine {
+    from { -webkit-mask-position: 110%; mask-position: 110%; }
+    to { -webkit-mask-position: -10%; mask-position: -10%; }
+}
