@@ -2,8 +2,8 @@
     "info": {
         "canRevive": false,
         "interpolation": true,
-        "playerScale": 0.33,
-        "speed": 10,
+        "playerScale": -0.1,
+        "speed": 105,
         "map": "DihorOtok_Main",
         "win": "Furiouspenguin01",
         "players": [{
@@ -72,8 +72,7 @@
             "id": "16"
         }, {
             "name": "Bahus20",
-            "team": 100016,
-            "id": "17"
+            "team": 100016
         }, {
             "name": "SugiKarasu",
             "team": 100017,
@@ -41708,7 +41707,6 @@
     }, {
         "type": "KILL",
         "data": {
-            "victimId": "7",
             "assistIds": [],
             "killerId": "81"
         },
@@ -41719,27 +41717,11 @@
             "id": "PACKAGE_1",
             "x": 556.1670343137255,
             "y": 479.74395424836604,
-            "sprite": "package"
+            "sprite": "pacK"
         },
         "time": 700784
     }, {
-        "type": "MOVE",
-        "data": {
-            "id": "78",
-            "x": 295.0049019607843,
-            "y": 460.09174836601306,
-            "rank": 0
-        },
-        "time": 700983
     }, {
-        "type": "CIRCLE_ON",
-        "data": {
-            "id": "S_ZONE",
-            "x": 456.29624183006536,
-            "y": 538.1485702614378,
-            "radius": 171.69415849673203,
-            "color": "0x0055FF"
-        },
         "time": 701284
     }, {
         "type": "CIRCLE_ON",
@@ -41747,8 +41729,7 @@
             "id": "W_ZONE",
             "x": 480.528227124183,
             "y": 547.2037581699346,
-            "radius": 130.4875612745098,
-            "color": "0xFFFFFF"
+            "radius": 130.4875612745098
         },
         "time": 701284
     }, {
@@ -41779,7 +41760,6 @@
         },
         "time": 701779
     }, {
-        "type": "MOVE",
         "data": {
             "id": "68",
             "x": 305.5372140522876,

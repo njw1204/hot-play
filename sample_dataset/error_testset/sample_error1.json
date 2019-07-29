@@ -3,12 +3,12 @@
         "canRevive": true,
         "interpolation": false,
         "playerScale": 0.3,
-        "speed": 20,
+        "speed": 24,
         "map": "Summoner's Rift",
         "win": "Red",
         "players": [{
             "name": "opoopp",
-            "team": 1,
+            "team": "1",
             "character": "Azir",
             "role": "TOP",
             "id": "1"
@@ -43,7 +43,6 @@
             "role": "TOP",
             "id": "6"
         }, {
-            "name": "mei you da long",
             "team": 2,
             "character": "Nidalee",
             "role": "JUNGLE",
@@ -76,8 +75,7 @@
             "y": 240,
             "sprite": "tower",
             "tint": "0x0088FF"
-        },
-        "time": 0
+        }
     }, {
         "type": "CREATE",
         "data": {
@@ -89,7 +87,7 @@
         },
         "time": 0
     }, {
-        "type": "CREATE",
+        "type": "BLAHBLAH",
         "data": {
             "id": "BLUE_TOP_LANE_BASE_TURRET",
             "x": 61,
@@ -122,7 +120,7 @@
         "type": "CREATE",
         "data": {
             "id": "BLUE_MID_LANE_BASE_TURRET",
-            "x": 184,
+            "x": "184",
             "y": 607,
             "sprite": "tower",
             "tint": "0x0088FF"
@@ -183,7 +181,7 @@
         "data": {
             "id": "RED_TOP_LANE_BASE_TURRET",
             "x": 568,
-            "y": 67,
+            "y": null,
             "sprite": "tower",
             "tint": "0xFF0000"
         },
@@ -197,7 +195,7 @@
             "sprite": "tower",
             "tint": "0xFF0000"
         },
-        "time": 0
+        "time": 1.23
     }, {
         "type": "CREATE",
         "data": {
@@ -1494,7 +1492,7 @@
             "y": 556.5562913907285,
             "level": 7
         },
-        "time": 660187
+        "time": -660187
     }, {
         "type": "MOVE",
         "data": {
@@ -3141,7 +3139,7 @@
         "data": {
             "killerId": "2",
             "victimId": "6",
-            "assistIds": ["5", "3", "4"]
+            "assistIds": 123
         },
         "time": 1547548
     }, {
