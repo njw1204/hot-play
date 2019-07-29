@@ -15,9 +15,9 @@ def lol_api_menu():
         break
 
     print("2. region : 변환할 대상 경기가 발생했던 서버의 지역명을 입력하세요.")
-    print("지역 목록 :", ", ".join(lol_api.REGIONS), "(kr이 한국 서버)")
+    print("지역 목록 :", ", ".join(lol_api.REGIONS), "(KR이 한국 서버)")
     while True:
-        region = input(">>> ").lower()
+        region = input(">>> ").upper()
         if region not in lol_api.REGIONS:
             print(ERR_MSG)
             continue
@@ -30,6 +30,8 @@ def lol_api_menu():
             print(ERR_MSG)
             continue
         break
+
+    lol_api.start_convert(api_key, region, match_id)
 
 
 def pubg_api_menu():
@@ -47,10 +49,11 @@ def pubg_api_menu():
     print("2. shard : 변환할 대상 경기가 발생했던 서버의 플랫폼명을 입력하세요.")
     print("플랫폼 목록 :", ", ".join(pubg_api.SHARDS))
     while True:
-        shard = input(">>> ").lower()
+        shard = input(">>> ").upper()
         if shard not in pubg_api.SHARDS:
             print(ERR_MSG)
             continue
+        shard = pubg_api.SHARDS[shard]
         break
 
     print("3. match_id : 변환할 대상 경기의 id 값을 입력하세요.")
@@ -60,6 +63,8 @@ def pubg_api_menu():
             print(ERR_MSG)
             continue
         break
+
+    pubg_api.start_convert(api_key, shard, match_id)
 
 
 if __name__ == "__main__":

@@ -1,10 +1,14 @@
 # This script is for Python 3
 
+import os
 import re
 import json
 import requests
 from riotwatcher import RiotWatcher
 from lib.game_event import *
+
+
+REGIONS = ["KR", "RU", "BR1", "OC1", "JP1", "NA1", "EUN1", "EUW1", "TR1", "LA1", "LA2"]
 
 
 def adjustLocation(x, y, mapId):
@@ -138,7 +142,6 @@ def parseTimeline(timeline, mapId):
                 "id": str(e["participantId"]),
                 "x": x,
                 "y": y,
-                "rank": None,
                 "level": e["level"]
             }))
         for e in frame["events"]:
@@ -168,16 +171,15 @@ def parseTimeline(timeline, mapId):
     return events
 
 
-if __name__ == "__main__":
-    placeTowers([])
-    watcher = RiotWatcher("RGAPI-0dada0be-ba4a-4b5e-b550-d65feb1c7cba")
-    region = "kr"
-    # match_id = "3771161918"
-    match_id = "3749533516"
+def start_convert(api_key, region, match_id):
+    print("변환을 시작합니다. 잠시 기다려주세요...")
+    watcher = RiotWatcher(api_key)
+    output_file = "lol_output.json"
     match = watcher.match.by_id(region, match_id)
     timeline = watcher.match.timeline_by_match(region, match_id)
     replay = {"info": parseBasicGameInfo(match), "timeline": parseTimeline(timeline, match["mapId"])}
     result = json.dumps(replay, cls=GameEventJSONEncoder)
-    with open("lol_output.json", "w", encoding="utf-8") as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(result)
-    print("Complete!")
+    print("===========================================")
+    print("Complete!", os.path.abspath(output_file), "에 저장되었습니다.")

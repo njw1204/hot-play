@@ -1,10 +1,19 @@
 # This script is for Python 3
 
+import os
 import re
 import json
 import dateutil.parser
 from pubg_python import PUBG, Shard
 from lib.game_event import *
+
+
+SHARDS = {
+    "STEAM": Shard.STEAM,
+    "KAKAO": Shard.KAKAO,
+    "XBOX": Shard.XBOX,
+    "PSN": Shard.PSN
+}
 
 
 MAP_SIZES = {
@@ -30,10 +39,8 @@ def adjustLocation(x, y, map_name):
     return (x, y)
 
 
-if __name__ == "__main__":
-    api_key = ""
-    shard = Shard.KAKAO
-    match_id = "30538212-1e14-4950-82bd-1343fa9c0693"
+def start_convert(api_key, shard, match_id):
+    print("변환을 시작합니다. 잠시 기다려주세요...")
 
     api = PUBG(api_key, shard)
     match = api.matches().get(match_id)
@@ -47,18 +54,7 @@ if __name__ == "__main__":
 
     winners = []
     for roster in match.rosters:
-        # rosters.append([roster.stats, roster.won])
         for player in roster.participants:
-            # id_dict[player.stats["playerId"]] = len(id_dict) + 1
-            # players.append({
-            #    "name": player.stats["name"],
-            #    "team": roster.stats["teamId"],
-            #    "character": None,
-            #    "role": None,
-            #    "rank": player.stats["winPlace"],
-            #    "id": id_dict[player.stats["playerId"]]
-            # })
-
             if player.stats["winPlace"] == 1:
                 winners.append(player.stats["name"])
 
@@ -88,8 +84,6 @@ if __name__ == "__main__":
         players.append({
             "name": re.sub("\\s\\s+", " ", user.name),
             "team": user.team_id,
-            "character": None,
-            "role": None,
             "id": id_dict[user.account_id]
         })
     info["players"] = players
@@ -128,7 +122,6 @@ if __name__ == "__main__":
                 "x": location[0],
                 "y": location[1],
                 "sprite": "package",
-                "tint": None
         }))
 
     for i in player_position_events:
@@ -143,22 +136,26 @@ if __name__ == "__main__":
             "x": location[0],
             "y": location[1],
             "rank": user.ranking,
-            "level": None
         }))
 
     for i in player_kill_events:
         timestamp = relativeTimestamp(gamestart_timestamp, i.timestamp)
         try:
-            events.append(GameEvent("KILL", timestamp, {
-                "killerId": id_dict.get(i.killer.account_id, None),
+            gev = GameEvent("KILL", timestamp, {
                 "victimId": id_dict[i.victim.account_id],
                 "assistIds": [id_dict[i.assistant.account_id]] if hasattr(i, "assistant") else []
-            }))
+            })
+            killer = id_dict.get(i.killer.account_id, None)
+            if killer is not None:
+                gev.data["killerId"] = killer
+            events.append(gev)
         except: pass
 
     events.sort()
     replay["timeline"] = events
     result = json.dumps(replay, cls=GameEventJSONEncoder)
-    with open("pubg_output.json", "w", encoding="utf-8") as f:
+    output_file = "pubg_output.json"
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(result)
-    print("Complete!")
+    print("===========================================")
+    print("Complete!", os.path.abspath(output_file), "에 저장되었습니다.")
