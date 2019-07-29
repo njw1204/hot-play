@@ -19,9 +19,9 @@ function initPIXI() {
     app.stage.sortableChildren = true;
 
     var loadList = [
-        {name: "map", url: "assets/map/" + replay.info.map + ".jpg"},
-        {name: "tower", url: "assets/object/tower.png"},
-        {name: "package", url: "assets/object/package.png"},
+        {name: "map", url: "https://hotplay.njw.kr/assets/map/" + replay.info.map + ".jpg"},
+        {name: "tower", url: "https://hotplay.njw.kr/assets/object/tower.png"},
+        {name: "package", url: "https://hotplay.njw.kr/assets/object/package.png"},
     ];
 
     var gr = new Graphics();

@@ -23,7 +23,7 @@ function addLOLImageLoad(loadList, neededChampionsList) {
         if (found) {
             loadList.push({
                 name: champ_name,
-                url: "assets/character/champions/" + champ_name + ".png"
+                url: "https://hotplay.njw.kr/assets/character/champions/" + champ_name + ".png"
             });
         }
     }
