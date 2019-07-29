@@ -1,9 +1,7 @@
 {
     "info": {
         "canRevive": false,
-        "interpolation": true,
         "playerScale": 0.33,
-        "speed": 10,
         "map": "Desert_Main",
         "win": "Akrra, crizzetheking",
         "players": [{

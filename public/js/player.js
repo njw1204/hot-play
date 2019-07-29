@@ -19,10 +19,13 @@ function initPIXI() {
     app.stage.sortableChildren = true;
 
     var loadList = [
-        {name: "map", url: "https://hotplay.njw.kr/assets/map/" + replay.info.map + ".jpg"},
         {name: "tower", url: "https://hotplay.njw.kr/assets/object/tower.png"},
         {name: "package", url: "https://hotplay.njw.kr/assets/object/package.png"},
     ];
+
+    if (replay.info.map) {
+        loadList.push({name: "map", url: "https://hotplay.njw.kr/assets/map/" + replay.info.map + ".jpg"});
+    }
 
     var gr = new Graphics();
     gr.lineStyle(3);
@@ -50,11 +53,13 @@ function getNeededPlayerSprites() {
 
 
 function setupReplayer() {
-    var map = new Sprite(resources.map.texture);
-    map.width = app.screen.width;
-    map.height = app.screen.height;
-    map.zIndex = -10000;
-    app.stage.addChild(map);
+    if (replay.info.map) {
+        var map = new Sprite(resources.map.texture);
+        map.width = app.screen.width;
+        map.height = app.screen.height;
+        map.zIndex = -10000;
+        app.stage.addChild(map);
+    }
 
     window.ingameFixedObjects = {};
 
@@ -78,15 +83,14 @@ function initPlayerSprites() {
         var user = replay.info.players[i];
         if (user.character)
             user.sprite = new Sprite(resources[user.character].texture);
-        else {
+        else
             user.sprite = new Sprite(window.defaultPlayer);
-        }
 
         user.sprite.scale.set(replay.info.playerScale);
         user.sprite.anchor.set(0.5);
         user.sprite.position.set(-999, -999);
 
-        if (replay.info.players.length <= 20) {
+        if (replay.info.players.length <= 10) {
             if (user.team === 1)
                 user.sprite.filters = [filterBlue];
             else if (user.team === 2)

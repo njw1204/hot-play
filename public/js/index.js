@@ -1,4 +1,6 @@
 window.onload = function() {
+    setDefaultReplayValue();
+
     window.vueApp = new Vue({
         el: "#app",
         data: {
@@ -66,4 +68,22 @@ function turnPause() {
         vueApp.playing = true;
     else
         vueApp.playing = false;
+}
+
+
+function setDefaultReplayValue() {
+    var info = window.replay.info;
+
+    var defaultList = [
+        ["speed", 10],
+        ["playerScale", 1],
+        ["interpolation", true]
+    ];
+
+    for (var i = 0; i < defaultList.length; i++) {
+        var j = defaultList[i];
+        if (info[j[0]] === undefined) {
+            info[j[0]] = j[1];
+        }
+    }
 }
