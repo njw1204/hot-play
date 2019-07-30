@@ -91,11 +91,6 @@ body {
 
 #event-list {
     left: -250px;
-    direction: rtl;
-}
-
-#event-list * {
-    direction: ltr;
 }
 
 #event-list td {
