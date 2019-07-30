@@ -8,7 +8,8 @@ body {
 }
 
 #app {
-    transform-origin: top center;
+    height: 100vh;
+    padding: 10px;
 }
 
 #title {
@@ -56,14 +57,15 @@ body {
 }
 
 #replay-timer #replay-pause {
+    font-size: 85%;
     border: 1px solid #708090;
 }
 
 #replay-slider {
     display: inline-block;
     vertical-align: middle;
-    width: 700px;
-    margin: 0 0 0 20px;
+    width: 80%;
+    margin: 0 0 0 15px;
     padding: 0;
 }
 

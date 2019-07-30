@@ -13,18 +13,18 @@ function initPIXI() {
         height: 800,
         antialias: true
     });
-    document.getElementById("replay").appendChild(app.view);
+    document.getElementById("player").appendChild(app.view);
     app.stage.filters = [new PIXI.filters.AlphaFilter()];
     app.stage.filterArea = app.screen;
     app.stage.sortableChildren = true;
 
     var loadList = [
-        {name: "tower", url: "https://hotplay.njw.kr/assets/object/tower.png"},
-        {name: "package", url: "https://hotplay.njw.kr/assets/object/package.png"},
+        {name: "tower", url: "assets/object/tower.png"},
+        {name: "package", url: "assets/object/package.png"},
     ];
 
     if (replay.info.map) {
-        loadList.push({name: "map", url: "https://hotplay.njw.kr/assets/map/" + replay.info.map + ".jpg"});
+        loadList.push({name: "map", url: "assets/map/" + replay.info.map + ".jpg"});
     }
 
     var gr = new Graphics();

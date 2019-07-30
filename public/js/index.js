@@ -8,7 +8,11 @@ window.onload = function() {
             timeline: 0,
             playerSpeed: window.replay.info.speed,
             playing: true,
-            originPlayingState: true
+            originPlayingState: true,
+            items: [
+                { message: 'Foo' },
+                { message: 'Bar' }
+            ]
         },
         computed: {
             timelineStr: function() {
@@ -49,6 +53,7 @@ window.onload = function() {
     });
 
     initPIXI();
+    onResizeFn();
 };
 
 
