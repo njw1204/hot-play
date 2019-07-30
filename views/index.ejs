@@ -32,7 +32,7 @@
                 <v-minusplus v-model="playerSpeed" :min="1" :max="100" :interval="5"></v-minusplus>
             </div>
         </div>
-        <div id="replay" class="container">
+        <div id="replay">
             <div class="replay-control">
                 <div id="replay-timer">
                     <button id="replay-pause" class="pure-button"><i :class="pauseCaption"></i></button>
@@ -50,6 +50,24 @@
                 </div>
             </div>
             <div id="player">
+                <div id="user-list" class="list">
+                    <table id="user-list-table" class="pure-table pure-table-bordered">
+                        <thead>
+                            <th>NAME</th>
+                            <th>K</th>
+                            <th v-if="canRevive">D</th>
+                            <th>A</th>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in playerList" v-if="item.visible">
+                                <td>{{ item.name }} <span v-if="item.death && !canRevive">[DIE]</span></td>
+                                <td>{{ item.kill }}</td>
+                                <td v-if="canRevive">{{ item.death }}</span>
+                                <td>{{ item.assist }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -95,6 +95,10 @@ function initPlayerSprites() {
                 user.sprite.filters = [filterBlue];
             else if (user.team === 2)
                 user.sprite.filters = [filterRed];
+
+            var teamName = ["BLUE", "RED"];
+            var playerVue = findPlayerById(user.id, window.vueApp.playerList);
+            playerVue.name = "[" + teamName[user.team - 1] + "] " + playerVue.name;
         }
     }
 
@@ -104,8 +108,13 @@ function initPlayerSprites() {
 }
 
 
-function findPlayerById(id) {
-    var players = replay.info.players;
+function findPlayerById(id, list) {
+    if (list) {
+        players = list;
+    }
+    else {
+        players = replay.info.players;
+    }
     for (var i = 0; i < players.length; i++) {
         if (players[i].id === id) {
             return players[i];
@@ -163,6 +172,7 @@ function draw() {
             var player = findPlayerById(e.data.id);
             player.sprite.position.set(e.data.x, e.data.y);
             window.moveInfo[e.data.id].nextMoveIdx++;
+            findPlayerById(e.data.id, window.vueApp.playerList).visible = true;
         }
         else if (e.type === "CREATE") {
             try {
@@ -191,10 +201,28 @@ function draw() {
             }
         }
         else if (e.type === "KILL") {
+            var killer  = findPlayerById(e.data.killerId);
+            if (killer) {
+                findPlayerById(e.data.killerId, window.vueApp.playerList).kill++;
+            }
+            var victim = findPlayerById(e.data.victimId);
             if (replay.info.canRevive === false) {
-                var victim = findPlayerById(e.data.victimId);
                 victim.sprite.tint = 0xDD0000;
                 victim.sprite.zIndex = -1;
+            }
+            victim = findPlayerById(e.data.victimId, window.vueApp.playerList);
+            victim.death++
+
+            var assist = e.data.assistIds;
+            if (assist) {
+                for (var i = 0; i < assist.length; i++) {
+                    try {
+                        findPlayerById(assist[i], window.vueApp.playerList).assist++;
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
+                }
             }
         }
         else if (e.type === "CIRCLE_ON") {
@@ -268,7 +296,6 @@ function resetSprites() {
     var players = replay.info.players;
     for (var i = 0; i < players.length; i++) {
         if (players[i].sprite instanceof Sprite) {
-            console.log(app.stage.children.length);
             players[i].sprite.parent.removeChild(players[i].sprite);
             players[i].sprite.destroy();
             players[i].sprite = null;

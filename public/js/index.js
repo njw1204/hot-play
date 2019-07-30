@@ -6,13 +6,11 @@ window.onload = function() {
         data: {
             title: "HotPlay",
             timeline: 0,
+            canRevive: window.replay.info.canRevive,
             playerSpeed: window.replay.info.speed,
             playing: true,
             originPlayingState: true,
-            items: [
-                { message: 'Foo' },
-                { message: 'Bar' }
-            ]
+            playerList: []
         },
         computed: {
             timelineStr: function() {
@@ -36,10 +34,12 @@ window.onload = function() {
                 this.playing = false;
             },
             playerRestore: function() {
+                loadPlayerList();
                 resetSprites();
                 this.playing = this.originPlayingState;
             },
             refreshTimeline: function() {
+                loadPlayerList();
                 resetSprites();
             }
         },
@@ -52,6 +52,7 @@ window.onload = function() {
         turnPause();
     });
 
+    loadPlayerList();
     initPIXI();
     onResizeFn();
 };
@@ -90,5 +91,22 @@ function setDefaultReplayValue() {
         if (info[j[0]] === undefined) {
             info[j[0]] = j[1];
         }
+    }
+}
+
+
+function loadPlayerList() {
+    var players = window.replay.info.players;
+    window.vueApp.playerList = [];
+    for (var i = 0; i < players.length; i++) {
+        var p = players[i];
+        window.vueApp.playerList.push({
+            id: p.id,
+            name: p.name,
+            kill: 0,
+            death: 0,
+            assist: 0,
+            visible: false
+        });
     }
 }
