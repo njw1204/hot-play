@@ -3,6 +3,14 @@ html, body {
     font-size: 16px;
 }
 
+body {
+    overflow-y: hidden;
+}
+
+#app {
+    transform-origin: top center;
+}
+
 #title {
     display: inline-block;
     margin: 0;
@@ -54,7 +62,7 @@ html, body {
 #replay-slider {
     display: inline-block;
     vertical-align: middle;
-    width: 720px;
+    width: 700px;
     margin: 0 0 0 20px;
     padding: 0;
 }
