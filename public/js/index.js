@@ -10,9 +10,13 @@ window.onload = function() {
             playerSpeed: window.replay.info.speed,
             playing: true,
             originPlayingState: true,
-            playerList: []
+            playerList: [],
+            eventList: []
         },
         computed: {
+            reversedEventList: function() {
+                return this.eventList.slice().reverse();
+            },
             timelineStr: function() {
                 return makeTimerStrFromMs(this.timeline);
             },
@@ -34,11 +38,13 @@ window.onload = function() {
                 this.playing = false;
             },
             playerRestore: function() {
+                this.eventList = [];
                 loadPlayerList();
                 resetSprites();
                 this.playing = this.originPlayingState;
             },
             refreshTimeline: function() {
+                this.eventList = [];
                 loadPlayerList();
                 resetSprites();
             }

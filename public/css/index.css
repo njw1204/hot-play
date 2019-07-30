@@ -81,17 +81,30 @@ body {
     font-size: 10px;
 }
 
-.list td {
-    white-space: nowrap;
-    padding: 0 2px;
-}
-
-#user-list-table {
+.list table {
     width: 100%;
 }
 
-#user-list-table tr {
+.list table th {
     text-align: center;
+}
+
+#event-list {
+    left: -250px;
+    direction: rtl;
+}
+
+#event-list * {
+    direction: ltr;
+}
+
+#event-list td {
+    text-align: left;
+}
+
+.list td {
+    white-space: nowrap;
+    padding: 0 2px;
 }
 
 #player canvas {
@@ -104,11 +117,27 @@ body {
 }
 
 .clear {
-    clear: both;
+    clear: both !important;
 }
 
 .right {
-    float: right;
+    float: right !important;
+}
+
+.center {
+    text-align: center !important;
+}
+
+.black {
+    color: black !important;
+}
+
+.red {
+    color: red !important;
+}
+
+.blue {
+    color: blue !important;
 }
 
 [v-cloak] {

@@ -187,6 +187,10 @@ function draw() {
                 sprite.anchor.set(0.5);
                 sprite.position.set(data.x, data.y);
                 app.stage.addChild(sprite);
+                window.vueApp.eventList.push({
+                    time: makeTimerStrFromMs(e.time),
+                    event: "<strong>" + e.data.id + "</strong> has created."
+                });
             }
             catch (err) {
                 console.log(err);
@@ -195,23 +199,53 @@ function draw() {
         else if (e.type === "REMOVE") {
             try {
                 ingameFixedObjects[e.data.id].visible = false;
+                window.vueApp.eventList.push({
+                    time: makeTimerStrFromMs(e.time),
+                    event: "<strong>" + e.data.id + "</strong> has destroyed."
+                });
             }
             catch (err) {
                 console.log(err);
             }
         }
         else if (e.type === "KILL") {
-            var killer  = findPlayerById(e.data.killerId);
+            var killer = findPlayerById(e.data.killerId);
+            var killerName;
             if (killer) {
                 findPlayerById(e.data.killerId, window.vueApp.playerList).kill++;
+                killerName = killer.name;
             }
+            else {
+                killerName = "System";
+            }
+
             var victim = findPlayerById(e.data.victimId);
             if (replay.info.canRevive === false) {
                 victim.sprite.tint = 0xDD0000;
                 victim.sprite.zIndex = -1;
             }
+
+            if (window.replay.info.players.length <= 10) {
+                if (!killer) {
+                    killer = {team : 0};
+                }
+                var classes = ["black", "blue", "red"];
+                window.vueApp.eventList.push({
+                    time: makeTimerStrFromMs(e.time),
+                    event: "<strong class='" + classes[killer.team] + "'>" + killerName +
+                        "</strong> has killed <strong class='" + classes[victim.team] + "'>" + victim.name + "</strong>."
+                });
+            }
+            else {
+                window.vueApp.eventList.push({
+                    time: makeTimerStrFromMs(e.time),
+                    event: "<strong>" + killerName + "</strong> has killed <strong>" + victim.name + "</strong>."
+                });
+            }
+
+
             victim = findPlayerById(e.data.victimId, window.vueApp.playerList);
-            victim.death++
+            victim.death++;
 
             var assist = e.data.assistIds;
             if (assist) {

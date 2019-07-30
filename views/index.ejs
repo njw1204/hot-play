@@ -50,6 +50,20 @@
                 </div>
             </div>
             <div id="player">
+                <div id="event-list" class="list">
+                    <table id="event-list-table" class="pure-table pure-table-bordered">
+                        <thead>
+                            <th>TIME</th>
+                            <th>EVENT</th>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in reversedEventList">
+                                <td class="center">{{ item.time }}</td>
+                                <td v-html="item.event"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div id="user-list" class="list">
                     <table id="user-list-table" class="pure-table pure-table-bordered">
                         <thead>
