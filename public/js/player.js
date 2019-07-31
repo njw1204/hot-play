@@ -274,6 +274,13 @@ function draw() {
         }
 
         eventQueuePos++;
+
+        if (eventQueuePos === window.replay.timeline.length && window.replay.info.win) {
+            window.vueApp.eventList.push({
+                time: makeTimerStrFromMs(e.time),
+                event: "Winner : <strong>" + window.replay.info.win + "</strong>"
+            });
+        }
     }
 
     if (interpolationMode) {
