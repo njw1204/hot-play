@@ -87,9 +87,30 @@ function initPlayerSprites() {
         else
             user.sprite = new Sprite(window.defaultPlayer);
 
+        user.nameSprite = new PIXI.Text(user.name, {fontFamily: "sans-serif", fontSize: "12px", padding: 2, fontWeight: "bold"});
+        var txtBG = new Sprite(Texture.WHITE);
+        txtBG.width = user.nameSprite.width;
+        txtBG.height = user.nameSprite.height;
+        user.txtBG = txtBG;
+
+        var cage = new Container();
+        cage.addChild(txtBG, user.nameSprite);
+        cage.position.set(-999, -999);
+        cage.visible = false;
+        cage.pivot.x = cage.width / 2;
+        cage.pivot.y = cage.height;
+        user.nameSpriteCage = cage;
+
+        if (user.nameSpriteCageVisible) {
+            cage.visible = true;
+        }
+        user.nameSpriteCageVisible = cage.visible;
+
+        user.sprite.playerObj = user;
         user.sprite.scale.set(replay.info.playerScale);
         user.sprite.anchor.set(0.5);
         user.sprite.position.set(-999, -999);
+        setUserSpriteAsButton(user.sprite, showName);
 
         if (replay.info.players.length <= 10) {
             if (user.team === 1)
@@ -105,6 +126,10 @@ function initPlayerSprites() {
 
     for (i = replay.info.players.length - 1; i >= 0; i--) {
         app.stage.addChild(replay.info.players[i].sprite);
+    }
+
+    for (i = replay.info.players.length - 1; i >= 0; i--) {
+        app.stage.addChild(replay.info.players[i].nameSpriteCage);
     }
 }
 
@@ -172,6 +197,7 @@ function draw() {
         if (e.type === "MOVE") {
             var player = findPlayerById(e.data.id);
             player.sprite.position.set(e.data.x, e.data.y);
+            player.nameSpriteCage.position.set(e.data.x, e.data.y - player.sprite.height / 2);
             window.moveInfo[e.data.id].nextMoveIdx++;
             findPlayerById(e.data.id, window.vueApp.playerList).visible = true;
         }
@@ -294,6 +320,7 @@ function draw() {
                     var beforeMove = playerMoveInfo.arr[nextMoveIdx - 1], afterMove = playerMoveInfo.arr[nextMoveIdx];
                     var computedMove = linearInterpolation(beforeMove, afterMove, vueApp.timeline);
                     playerSprite.position.set(computedMove.x, computedMove.y);
+                    players[i].nameSpriteCage.position.set(computedMove.x, computedMove.y - playerSprite.height / 2);
                 }
             }
         }
@@ -301,10 +328,12 @@ function draw() {
 
     var passedMsTime = getFrameIntervalFromSpeed(vueApp.playerSpeed);
     if (vueApp.playing) {
-        if (eventQueuePos < replay.timeline.length && vueApp.timeline + passedMsTime <= getLastEventTime())
+        if (eventQueuePos < replay.timeline.length && vueApp.timeline + passedMsTime <= getLastEventTime()) {
             vueApp.timeline += passedMsTime;
-        else
+        }
+        else {
             vueApp.timeline = getLastEventTime();
+        }
     }
 }
 
@@ -338,9 +367,14 @@ function resetSprites() {
     var players = replay.info.players;
     for (var i = 0; i < players.length; i++) {
         if (players[i].sprite instanceof Sprite) {
-            players[i].sprite.parent.removeChild(players[i].sprite);
-            players[i].sprite.destroy();
+            DestroySpriteCompleted(players[i].sprite);
             players[i].sprite = null;
+            DestroySpriteCompleted(players[i].nameSprite);
+            players[i].nameSprite = null;
+            DestroySpriteCompleted(players[i].txtBG);
+            players[i].txtBG = null;
+            DestroySpriteCompleted(players[i].nameSpriteCage);
+            players[i].nameSpriteCage = null;
         }
     }
 
@@ -373,4 +407,24 @@ function getFrameIntervalFromSpeed(speed) {
     var originMsPerFrame = 1000 / fps;
     var msPerFrame = originMsPerFrame * speed;
     return msPerFrame;
+}
+
+
+function setUserSpriteAsButton(btn, clickCallBack) {
+    btn.interactive = true;
+    btn.buttonMode = true;
+    btn.defaultCursor = "pointer";
+    btn.on("pointerdown", clickCallBack);
+}
+
+
+function showName() {
+    this.playerObj.nameSpriteCage.visible = !this.playerObj.nameSpriteCage.visible;
+    this.playerObj.nameSpriteCageVisible = this.playerObj.nameSpriteCage.visible;
+}
+
+
+function DestroySpriteCompleted(sprite) {
+    sprite.parent.removeChild(sprite);
+    sprite.destroy();
 }
