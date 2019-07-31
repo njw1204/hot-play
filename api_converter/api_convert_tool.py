@@ -23,7 +23,7 @@ def lol_api_menu():
             continue
         break
 
-    print("3. match_id : 변환할 대상 경기의 id 값을 입력하세요.")
+    print("3. match_id : 변환할 대상 경기의 id 값을 입력하세요. (match id를 모른다면 동봉된 get_lol_match_id.py를 실행해보세요.)")
     while True:
         match_id = input(">>> ")
         if not match_id:
@@ -56,7 +56,7 @@ def pubg_api_menu():
         shard = pubg_api.SHARDS[shard]
         break
 
-    print("3. match_id : 변환할 대상 경기의 id 값을 입력하세요.")
+    print("3. match_id : 변환할 대상 경기의 id 값을 입력하세요. (match id를 모른다면 동봉된 get_pubg_match_id.py를 실행해보세요.)")
     while True:
         match_id = input(">>> ")
         if not match_id:
