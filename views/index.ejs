@@ -73,8 +73,11 @@
                             <th>A</th>
                         </thead>
                         <tbody>
-                            <tr v-for="item in playerList" v-if="item.visible">
-                                <td>{{ item.name }} <span v-if="item.death && !canRevive">[DIE]</span></td>
+                            <tr v-for="item in sortedPlayerList" v-if="item.visible">
+                                <td>
+                                    <span v-if="item.death && !canRevive" class="red">{{ item.name }} (DIE)</span>
+                                    <strong v-else>{{ item.name }}</strong>
+                                </td>
                                 <td>{{ item.kill }}</td>
                                 <td v-if="canRevive">{{ item.death }}</span>
                                 <td>{{ item.assist }}</td>

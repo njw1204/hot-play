@@ -14,6 +14,21 @@ window.onload = function() {
             eventList: []
         },
         computed: {
+            sortedPlayerList: function() {
+                if (this.canRevive) {
+                    return this.playerList;
+                }
+                else {
+                    return this.playerList.slice().sort(function(a, b) {
+                        var apt = 0, bpt = 0;
+                        if (a.death) apt -= 10000000;
+                        if (b.death) bpt -= 10000000;
+                        apt += a.kill * 1000 + a.assist;
+                        bpt += b.kill * 1000 + b.assist;
+                        return -(apt - bpt);
+                    });
+                }
+            },
             reversedEventList: function() {
                 return this.eventList.slice().reverse();
             },

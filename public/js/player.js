@@ -5,6 +5,7 @@ function initPIXI() {
     resources = PIXI.loader.resources;
     TextureCache = PIXI.utils.TextureCache;
     Sprite = PIXI.Sprite;
+    Texture = PIXI.Texture;
     Rectangle = PIXI.Rectangle;
     Graphics = PIXI.Graphics;
 
