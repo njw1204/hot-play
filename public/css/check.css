@@ -1,0 +1,33 @@
+#ck-button {
+    background-color: #EFEFEF;
+    border-radius: 4px;
+    border: 1px solid #D0D0D0;
+    overflow: auto;
+    float: left;
+}
+
+#ck-button:hover {
+    border: 1px solid #191;
+}
+
+#ck-button label {
+    float: left;
+    width: 4.0em;
+    cursor: pointer;
+}
+
+#ck-button label span {
+    text-align: center;
+    padding: 3px 0px;
+    display: block;
+}
+
+#ck-button label input {
+    position: absolute;
+    top: -20px;
+}
+
+#ck-button input:checked + span {
+    background-color: #191;
+    color: #fff;
+}

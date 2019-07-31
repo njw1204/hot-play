@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://hotplay.njw.kr/css/pure-min.css">
     <link rel="stylesheet" href="https://hotplay.njw.kr/css/index.css">
     <link rel="stylesheet" href="https://hotplay.njw.kr/css/vue-minusplus.css">
+    <link rel="stylesheet" href="https://hotplay.njw.kr/css/check.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-slider-component@3.0.33/theme/default.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/vue/2.3.2/vue.js"></script>
@@ -19,6 +20,8 @@
     <script src="https://hotplay.njw.kr/js/lol.js"></script>
     <script src="https://hotplay.njw.kr/js/player.js"></script>
     <script src="https://hotplay.njw.kr/js/scale.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/howler@2.1.2/dist/howler.min.js"></script>
+    <script src="https://hotplay.njw.kr/js/bgm.js"></script>
     <script>
         window.replay = <%- replay %>;
     </script>
@@ -29,6 +32,11 @@
         <div class="header">
             <h3 id="title"><a href="/">{{ title }}</a></h3>
             <div class="right">
+                <div id="ck-button">
+                    <label>
+                        <input id="bgm-check" type="checkbox" value="0"><span>BGM</span>
+                    </label>
+                </div>
                 <v-minusplus v-model="playerSpeed" :min="1" :max="100" :interval="5"></v-minusplus>
             </div>
         </div>

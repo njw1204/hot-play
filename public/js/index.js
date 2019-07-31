@@ -76,6 +76,7 @@ window.onload = function() {
 
     loadPlayerList();
     initPIXI();
+    initBGM();
     onResizeFn();
 };
 
