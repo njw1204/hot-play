@@ -65,6 +65,8 @@ def start_convert(api_key, shard, match_id):
         "speed": 10,
         "map": map_name,
         "win": ", ".join(winners),
+        "sortPlayerList": True,
+        "teamVS": False
     }
     replay["info"] = info
 
@@ -118,7 +120,7 @@ def start_convert(api_key, shard, match_id):
         location = adjustLocation(i.item_package.location.x, i.item_package.location.y, map_name)
         timestamp = relativeTimestamp(gamestart_timestamp, i.timestamp)
         events.append(GameEvent("CREATE", timestamp, {
-                "id": "PACKAGE_%d" % n,
+                "id": "PACKAGE_%d" % (n + 1),
                 "x": location[0],
                 "y": location[1],
                 "sprite": "package",
@@ -139,15 +141,22 @@ def start_convert(api_key, shard, match_id):
         }))
 
     for i in player_kill_events:
-        timestamp = relativeTimestamp(gamestart_timestamp, i.timestamp)
         try:
-            gev = GameEvent("KILL", timestamp, {
-                "victimId": id_dict[i.victim.account_id],
-                "assistIds": [id_dict[i.assistant.account_id]] if hasattr(i, "assistant") else []
-            })
+            timestamp = relativeTimestamp(gamestart_timestamp, i.timestamp)
             killer = id_dict.get(i.killer.account_id, None)
+            try:
+                assists = [id_dict[i._data.store["assistant"]["accountId"]]] if "assistant" in i._data.store else []
+            except:
+                assists = []
+
+            gev = GameEvent("KILL", timestamp, {
+                "victimId": id_dict[i.victim.account_id]
+            })
             if killer is not None:
                 gev.data["killerId"] = killer
+                if assists == [killer]:
+                    assists = []
+            gev.data["assistIds"] = assists
             events.append(gev)
         except: pass
 

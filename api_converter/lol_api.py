@@ -87,6 +87,8 @@ def parseBasicGameInfo(match):
     info["interpolation"] = False
     info["playerScale"] = 0.3
     info["speed"] = 20
+    info["sortPlayerList"] = False
+    info["teamVS"] = True
 
     mapId = match["mapId"]
     if mapId == 10:

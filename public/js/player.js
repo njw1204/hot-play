@@ -112,7 +112,7 @@ function initPlayerSprites() {
         user.sprite.position.set(-999, -999);
         setUserSpriteAsButton(user.sprite, showName);
 
-        if (replay.info.players.length <= 10) {
+        if (replay.info.teamVS) {
             if (user.team === 1)
                 user.sprite.filters = [filterBlue];
             else if (user.team === 2)
@@ -252,7 +252,7 @@ function draw() {
                 victim.sprite.zIndex = -1;
             }
 
-            if (window.replay.info.players.length <= 10) {
+            if (window.replay.info.teamVS) {
                 if (!killer) {
                     killer = {team : 0};
                 }

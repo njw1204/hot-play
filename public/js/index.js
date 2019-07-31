@@ -7,6 +7,7 @@ window.onload = function() {
             title: "HotPlay",
             timeline: 0,
             canRevive: window.replay.info.canRevive,
+            sortPlayerList: window.replay.info.sortPlayerList,
             playerSpeed: window.replay.info.speed,
             playing: true,
             originPlayingState: true,
@@ -15,7 +16,7 @@ window.onload = function() {
         },
         computed: {
             sortedPlayerList: function() {
-                if (this.canRevive) {
+                if (!this.sortPlayerList) {
                     return this.playerList;
                 }
                 else {

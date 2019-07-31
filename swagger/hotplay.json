@@ -102,7 +102,9 @@
         "type": "object",
         "required": [
           "canRevive",
-          "players"
+          "players",
+          "teamVS",
+          "sortPlayerList"
         ],
         "properties": {
           "players": {
@@ -116,6 +118,14 @@
           "canRevive": {
             "type": "boolean",
             "description": "유저의 부활 가능 여부 (ex. LOL: true, PUBG: false)"
+          },
+          "teamVS": {
+            "type": "boolean",
+            "description": "두 팀간의 1:1 대결인지 여부 (ex. LOL: true, PUBG: false)"
+          },
+          "sortPlayerList": {
+            "type": "boolean",
+            "description": "유저 리스트를 랭킹 순으로 정렬해서 보여줄지 여부"
           },
           "map": {
             "type": "string",
