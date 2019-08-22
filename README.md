@@ -13,6 +13,12 @@ HotPlay는 LOL, PUBG 등 각종 게임의 replay를 브라우저에서 감상할
    - 리플레이 테스트 용도로는 `sample_dataset` 폴더에 있는 파일을 업로드하면 괜찮습니다.
    - API 메뉴를 선택하면 Swagger UI를 통해 API 형식을 파악하고 테스트할 수 있습니다.
 
+## 스크린샷
+### 1) PUBG
+![screenshot 1](https://user-images.githubusercontent.com/38099251/63531753-28889b00-c544-11e9-878f-a13d028339cb.png)
+### 2) LOL
+![screenshot 2](https://user-images.githubusercontent.com/38099251/63531605-d2b3f300-c543-11e9-9531-49158e0667ba.png)
+
 ## HotPlay 전용 replay 파일에 대해
 HotPlay는 범용성 있는 replay 지원을 위해 HotPlay 전용 replay 파일(JSON 확장자)을 사용합니다. 기존 게임의 replay를 HotPlay 전용 파일로 변환해서 사용하면 됩니다. 어느 게임이든지 쉽게 변환할 수 있도록 스키마를 설계했습니다.
 
