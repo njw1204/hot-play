@@ -6,18 +6,7 @@
   "scripts": {
     "start": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/njw1204/hot-play.git"
-  },
-  "author": {
-    "name": "Jongwoo Na",
-    "email": "njw1204@naver.com"
-  },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/njw1204/hot-play/issues"
-  },
   "dependencies": {
     "api-schema-builder": "^1.1.5",
     "compression": "^1.7.4",
