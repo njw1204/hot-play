@@ -22,7 +22,7 @@ HotPlay는 범용성 있는 replay 지원을 위해 HotPlay 전용 replay 파일
 
 - `api-converter/api_convert_tool.py`를 통해 LOL과 PUBG의 replay를 HotPlay 전용 파일로 변환할 수 있습니다.
 - 그 외의 게임은 리플레이 스키마에 맞춰 변환기를 제작해서 사용하시면 됩니다.
-- HotPlay 전용 replay 파일의 스키마는 Swagger UI를 통해 제공하고 있습니다 : https://hotplay.njw.kr/api
+- HotPlay 전용 replay 파일의 스키마는 Swagger UI를 통해 제공하고 있습니다.
 
 ## 디렉토리별 설명
 ### 1. api_converter
