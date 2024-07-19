@@ -1,8 +1,6 @@
 # HotPlay - Universal Game Replay Module
 ![HotPlay](https://user-images.githubusercontent.com/38099251/63399491-a85f1a00-c40b-11e9-8928-ff53e692dc2a.png)
 
-https://hotplay.njw.kr
-
 HotPlay는 LOL, PUBG 등 각종 게임의 replay를 브라우저에서 감상할 수 있게 만드는 프로젝트입니다. 어느 게임이든지 상관없이 저희의 통합 파일으로 변환만 하고 API 호출을 하면 리플레이를 볼 수 있는 웹 페이지를 내려줍니다. 범용성 있는 게임 지원에 중점을 두어 개발했습니다.
 
 ## 시작하기
@@ -54,28 +52,3 @@ HotPlay API를 Swagger(OpenAPI) 형식으로 작성한 파일이 포함되어 �
 
 ## 지적재산권
 이 프로젝트에서는 LOL과 PUBG의 지적재산권(Intellectual Property)을 사용하고 있습니다. Riot Games의 [Legal Jibber Jabber](https://www.riotgames.com/en/legal), PUBG의 [Player-created Content](https://www.pubg.com/player-created-content/) 약관을 따르고 있으며, 비상업적 목적으로 사용하고 있습니다.
-
-## 라이센스
-```
-MIT License
-
-Copyright (c) 2019 Jongwoo Na
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
